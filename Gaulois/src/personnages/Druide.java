@@ -5,12 +5,11 @@ import Objets.Chaudron;
 public class Druide {
 	private String nom;
 	private int force;
-	private Chaudron chaudron;
+	private Chaudron chaudron=new Chaudron();;
 	
 	public Druide(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
-		this.chaudron= new Chaudron();
 	}
 	public String getNom() {
 		return nom;
@@ -27,8 +26,9 @@ public class Druide {
 	}
 	public void boosterGaulois(Gaulois gaulois) {
 		if (chaudron.resterPotion()){
-			if (gaulois.getNom()=="Obélix") {
-				parler("Non, "+gaulois.getNom+" Non! Et tu le sais bien!");
+			String nomGaulois=gaulois.getNom();
+			if (nomGaulois!=null && nomGaulois.equals("Obélix")) {
+				parler("Non, "+gaulois.getNom()+" Non! Et tu le sais bien!");
 			}
 			gaulois.boirePotion(chaudron.prendreLouche());
 		}

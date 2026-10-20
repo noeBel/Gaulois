@@ -13,11 +13,11 @@ public class Chaudron {
 	}
 	public int prendreLouche() {
 		if (resterPotion()) {
-			this.quantitePotion=this.quantitePotion-1;
+			quantitePotion--;
 			return forcePotion;
 		}
 		else {
-			this.forcePotion=0;
+			forcePotion=0;
 			return forcePotion;
 		}
 	}
