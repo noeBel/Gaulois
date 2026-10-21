@@ -7,14 +7,14 @@ import personnages.Gaulois;
 public class Village {
 	private String nom;
 	private int nbVillageois=0;
-	private Gaulois villageois[];
+	private Gaulois[] villageois;
 	private Gaulois chef;
 	
-	public Village(String nom, Gaulois chef, int NB_VILLAGEOIS_MAX) {
+	public Village(String nom, Gaulois chef, int nbVillageoisMax) {
 		this.nom = nom;
 		this.chef=chef;
 		chef.setVillage(this);
-		this.villageois = new Gaulois[NB_VILLAGEOIS_MAX];
+		this.villageois = new Gaulois[nbVillageoisMax];
 	}
 
 	public String getNom() {
@@ -42,7 +42,7 @@ public class Village {
 	public void afficherGaulois() {
 		System.out.println("Dans ce village vivent les gaulois:");
 		for (int i = 0; i < nbVillageois; i++) {
-			System.out.println("	-"+villageois[i].getNom());
+			System.out.println("\t-"+villageois[i].getNom());
 		}
 	}
 	public static void main(String[] args) {
