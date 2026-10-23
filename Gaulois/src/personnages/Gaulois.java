@@ -1,6 +1,7 @@
 package personnages;
 
 import objets.Equipement;
+import village_gaulois.Musee;
 import village_gaulois.Village;
 
 public class Gaulois {
@@ -42,17 +43,19 @@ public class Gaulois {
 //		System.out.println(nom+" envoie un grand coup dans la machoîre de "+romain.getNom());
 //		romain.recevoirCoup(forceCoup);
 //	}
-	public void frapper(Romain romain) {
+	public boolean frapper(Romain romain) {
 		System.out.println(nom + " envoie un grand coup dans la mâchoire de "+ romain.getNom());
-		Equipement[] tropheesRecues = romain.recevoirCoup((force / 3) * effetPotion);
-		effetPotion--;
-		if (effetPotion < 1) {
-		effetPotion = 1;
+		Equipement[] tropheesRecues = romain.recevoirCoup((force / 2) * effetPotion);
+		if (effetPotion > 1) effetPotion--;
+		else effetPotion = 1;
+		if (tropheesRecues!=null) {
+			for (int i = 0; i < tropheesRecues.length && tropheesRecues[i] != null; i++, nbTrophees++) {
+				this.trophees[nbTrophees] = tropheesRecues[i];
+			}
 		}
-		for (int i = 0; tropheesRecues != null && i < tropheesRecues.length; i++, nbTrophees++) {
-			this.trophees[nbTrophees] = tropheesRecues[i];
-		}
-		}
+		//renvoie si le coup a reussi ou non
+		return tropheesRecues!=null;
+	}
 	public void boirePotion(int forcePotion) {
 		effetPotion=forcePotion;
 	}
@@ -68,6 +71,15 @@ public class Gaulois {
 		parler(presentation);
 	}
 	
+	public void faireUneDonnation(Musee musee) {
+		parler("Je donne au musee tout mes trophees");
+		for (int i=0;i<nbTrophees;i++) {
+			System.out.println("	-"+trophees[i]);
+			musee.donnerTrophees(this, trophees[i]);
+			trophees[i]=null;
+		}
+		nbTrophees=0;
+	}
 	@Override
 	public String toString() {
 		return "Gaulois [nom=" + nom + ", force=" + force + ", effetPotion=" + effetPotion + "]";
